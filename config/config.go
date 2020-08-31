@@ -7,8 +7,10 @@ import "time"
 
 type Config struct {
 	Period time.Duration `config:"period"`
+        File   string        `config:"log_file"`
 }
 
 var DefaultConfig = Config{
 	Period: 1 * time.Second,
+        File  : "",
 }
