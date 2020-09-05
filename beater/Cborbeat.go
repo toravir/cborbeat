@@ -29,11 +29,8 @@ func New(b *beat.Beat, cfg *common.Config) (beat.Beater, error) {
 	}
 
         info, err := os.Stat(c.File)
-        if os.IsNotExist(err) {
-		return nil, fmt.Errorf("Input file %s does not exist - pls check cborbeat.yml", c.File)
-        }
-        if err != nil || info.IsDir() {
-		return nil, fmt.Errorf("Error accessing input file %s pls check cborbeat.yml. %v", c.File, err)
+        if err == nil && info.IsDir() {
+		return nil, fmt.Errorf("Error input file is a DIR !! %s pls check cborbeat.yml. %v", c.File, err)
         }
 
 	bt := &cborbeat{
@@ -54,8 +51,11 @@ func (bt *cborbeat) Run(b *beat.Beat) error {
 		return err
 	}
 
-        rdr, _ := csd.NewFollowReader(bt.inputFile, true, bt.done)
-        decoder := csd.NewDecoder(rdr)
+        rdr, err := NewFollowReader(bt.inputFile, true, bt.done)
+        var decoder *csd.Decoder = nil
+        if err == nil {
+            decoder = csd.NewDecoder(rdr)
+        }
 
 	ticker := time.NewTicker(bt.config.Period)
 	counter := 1
@@ -65,6 +65,16 @@ func (bt *cborbeat) Run(b *beat.Beat) error {
 			return nil
 		case <-ticker.C:
 		}
+                if decoder == nil {
+                    rdr, err := NewFollowReader(bt.inputFile, true, bt.done)
+                    if err == nil {
+                        decoder = csd.NewDecoder(rdr)
+                    }
+                    if decoder == nil {
+                        //Try again next time
+                        continue
+                    }
+                }
                 ll, _ := decoder.SafeNext()
 		event := beat.Event{
 			Timestamp: time.Now(),
