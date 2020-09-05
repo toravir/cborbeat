@@ -1,18 +1,18 @@
-# {Cborbeat}
+# Cborbeat
 
-Welcome to {Cborbeat}.
+Welcome to Cborbeat.
 
 Ensure that this folder is at the following location:
 `${GOPATH}/src/github.com/toravir/cborbeat`
 
-## Getting Started with {Cborbeat}
+## Getting Started with Cborbeat
 
 ### Requirements
 
 * [Golang](https://golang.org/dl/) 1.7
 
 ### Init Project
-To get running with {Cborbeat} and also install the
+To get running with Cborbeat and also install the
 dependencies, run the following command:
 
 ```
@@ -21,7 +21,7 @@ make setup
 
 It will create a clean git history for each major step. Note that you can always rewrite the history if you wish before pushing your changes.
 
-To push {Cborbeat} in the git repository, run the following commands:
+To push Cborbeat in the git repository, run the following commands:
 
 ```
 git remote set-url origin https://github.com/toravir/cborbeat
@@ -32,7 +32,7 @@ For further development, check out the [beat developer guide](https://www.elasti
 
 ### Build
 
-To build the binary for {Cborbeat} run the command below. This will generate a binary
+To build the binary for Cborbeat run the command below. This will generate a binary
 in the same directory with the name cborbeat.
 
 ```
@@ -42,7 +42,7 @@ make
 
 ### Run
 
-To run {Cborbeat} with debugging output enabled, run:
+To run Cborbeat with debugging output enabled, run:
 
 ```
 ./cborbeat -c cborbeat.yml -e -d "*"
@@ -51,7 +51,7 @@ To run {Cborbeat} with debugging output enabled, run:
 
 ### Test
 
-To test {Cborbeat}, run the following command:
+To test Cborbeat, run the following command:
 
 ```
 make testsuite
@@ -79,7 +79,7 @@ make update
 
 ### Cleanup
 
-To clean  {Cborbeat} source code, run the following command:
+To clean  Cborbeat source code, run the following command:
 
 ```
 make fmt
@@ -94,7 +94,7 @@ make clean
 
 ### Clone
 
-To clone {Cborbeat} from the git repository, run the following commands:
+To clone Cborbeat from the git repository, run the following commands:
 
 ```
 mkdir -p ${GOPATH}/src/github.com/toravir/cborbeat
